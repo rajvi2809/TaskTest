@@ -12,35 +12,38 @@ const cartRoutes = require("./routes/cart");
 
 const app = express();
 
+// app.use(
+//   cors({
+//     origin:
+//       process.env.NODE_ENV === "production"
+//         ? // ["https://your-frontend-url.com"]
+//           ["http://localhost:5173"]
+//         : [
+//             "http://localhost:3000",
+//             "http://localhost:5173",
+//             "http://localhost:5174",
+//           ],
+//     credentials: true,
+//   })
+// );
+
 app.use(
   cors({
-    origin:
-      process.env.NODE_ENV === "production"
-        ? ["https://your-frontend-url.com"]
-        : // ["http://localhost:5173"]
-          [
-            "http://localhost:3000",
-            "http://localhost:5173",
-            "http://localhost:5174",
-          ],
+    origin: true,
     credentials: true,
   })
 );
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 connectMongoDB();
 
-// app.use("/api/auth", authRoutes);
-// app.use("/api/products", productRoutes);
-// app.use("/api/orders", orderRoutes);
-// app.use("/api/cart", cartRoutes);
-
-app.use("https://tasktest-1.onrender.com/api/auth", authRoutes);
-app.use("https://tasktest-1.onrender.com/api/products", productRoutes);
-app.use("https://tasktest-1.onrender.com/api/orders", orderRoutes);
-app.use("https://tasktest-1.onrender.com/api/cart", cartRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/cart", cartRoutes);
 
 // Health check
 // app.get("/api/health", (req, res) => {
