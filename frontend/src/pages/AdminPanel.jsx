@@ -29,7 +29,9 @@ function AdminPanel() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const response = await api.get("/products", { params: { limit: 100 } });
+      const response = await api.get("/products", {
+        params: { limit: 100 },
+      });
       setProducts(response.data.products);
     } catch (error) {
       setError("Failed to fetch products");
