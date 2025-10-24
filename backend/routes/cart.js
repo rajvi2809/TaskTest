@@ -11,13 +11,13 @@ const { authenticateToken } = require("../middleware/auth");
 
 const router = express.Router();
 
-// All cart routes require authentication
+
 router.use(authenticateToken);
 
-// Get user's cart
+
 router.get("/", getCart);
 
-// Add item to cart
+
 router.post(
   "/",
   [
@@ -30,7 +30,7 @@ router.post(
   addToCart
 );
 
-// Update cart item quantity
+
 router.put(
   "/items/:id",
   [
@@ -41,10 +41,10 @@ router.put(
   updateCartItem
 );
 
-// Remove item from cart
+
 router.delete("/items/:id", removeFromCart);
 
-// Clear entire cart
+
 router.delete("/", clearCart);
 
 module.exports = router;

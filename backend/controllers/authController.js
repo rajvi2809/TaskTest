@@ -62,11 +62,11 @@ const login = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // First try to find user in PostgreSQL (both customers and admins)
+  
     let account = await User.findByEmail(email);
     let accountType = "user";
 
-    // If not found in PostgreSQL users, try MongoDB admins (if connected)
+  
     if (!account) {
       try {
         account = await Admin.findOne({ email }).exec();
@@ -76,7 +76,7 @@ const login = async (req, res) => {
           "MongoDB not available for admin login:",
           mongoError.message
         );
-        // Continue without MongoDB admin check
+  
       }
     }
 
@@ -84,7 +84,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Verify password
+  
     let isPasswordValid = false;
     if (accountType === "user") {
       isPasswordValid = await User.verifyPassword(
@@ -99,7 +99,7 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    // Create JWT token
+  
     let tokenPayload;
     let userInfo;
 

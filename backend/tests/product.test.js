@@ -9,7 +9,6 @@ describe("Product Sorting Tests", () => {
       expect(response.body).toHaveProperty("products");
       expect(response.body).toHaveProperty("pagination");
 
-      // Verify descending order
       if (response.body.products.length > 1) {
         for (let i = 1; i < response.body.products.length; i++) {
           expect(response.body.products[i - 1].price).toBeGreaterThanOrEqual(
@@ -27,7 +26,6 @@ describe("Product Sorting Tests", () => {
 
       expect(response.body).toHaveProperty("products");
 
-      // Verify ascending order
       if (response.body.products.length > 1) {
         for (let i = 1; i < response.body.products.length; i++) {
           expect(response.body.products[i - 1].price).toBeLessThanOrEqual(
